@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 
+import {
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateUrl,
+} from "../utils";
+
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +27,19 @@ class Form extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
+
+    const { fullName, email, phone, blogUrl } = this.state;
+
+    if (
+      validateName(fullName) &&
+      validateEmail(email) &&
+      validatePhone(phone) &&
+      validateUrl(blogUrl)
+    ) {
+      this.props.isFormValid(true);
+    } else {
+      this.props.isFormValid(false);
+    }
   };
 
   render() {
